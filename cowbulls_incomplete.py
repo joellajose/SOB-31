@@ -1,13 +1,33 @@
 import random
 
+def getDigits(num):
+    return [int(i) for i in str(num)]
+
 def compare_numbers(number, user_guess):
     ## your code here
+    cowbull = [0,0]
+    num_li = getDigits(number)
+    guess_li = getDigits(user_guess)
+      
+    for i,j in zip(num_li,guess_li):
+          
+        # common digit present
+        if j in num_li:
+          
+            # common digit exact match
+            if j == i:
+                cowbull[1] += 1
+              
+            # common digit match but in wrong position
+            else:
+                cowbull[0] += 1
     return cowbull
+
 
 playing = True #gotta play the game
 number = str(random.randint(0,9999)) #random 4 digit number
 guesses = 0
-print number
+#print (number)
 
 print("Let's play a game of Cowbull!") #explanation
 print("I will generate a number, and you have to guess the numbers one digit at a time.")
@@ -16,7 +36,7 @@ print("The game ends when you get 4 bulls!")
 print("Type exit at any prompt to exit.")
 
 while playing:
-    user_guess = raw_input("Give me your best guess!")
+    user_guess = input("Give me your best guess!")
     if user_guess == "exit":
         break
     cowbullcount = compare_numbers(number,user_guess)
